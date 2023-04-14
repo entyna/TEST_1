@@ -1,39 +1,48 @@
-let xoff = 0;
+let texcoordShader;
+let uniShader;
+let pg0;
+let pg1;
 
-function setup() {
-  createCanvas(400, 400);
-  pixelDensity(1);
+function preload(){
+  texcoordShader = loadShader('shader.vert', 'shader.frag');
+  uniShader = loadShader('uniform.vert', 'uniform.frag');
 }
 
-function draw() {
-  background(255);
-  loadPixels();
+function setup() {
+  frameRate(24);
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  noStroke();
+  pg0 = createGraphics(width, height, WEBGL);
+  pg1 = createGraphics(width, height, WEBGL);
+  pg0.pixelDensity(1);
+  pg1.noStroke();
+}
 
-  // loop through every pixel in the canvas
-  for (let x = 0; x < width; x++) {
-    for (let y = 0; y < height; y++) {
+function draw() {  
+  translate(-width / 2, -height / 2);
+  drawPG0();
+  image(pg0, 0, 0);
+  drawPG1();
+  blendMode(SUBTRACT);
+  image(pg1, 0, 0);
+  blendMode(BLEND);
 
-      // calculate a noise value for this pixel using Perlin noise
-      let noiseVal = noise(xoff + x * 0.01, y * 0.01);
 
-      // set the pixel color based on the noise value
-      let pixelIndex = (x + y * width) * 4;
-      if (noiseVal < 0.5) {
-        pixels[pixelIndex] = 0; // red
-        pixels[pixelIndex + 1] = 0; // green
-        pixels[pixelIndex + 2] = 0; // blue
-        pixels[pixelIndex + 3] = 255; // alpha
-      } else {
-        pixels[pixelIndex] = 255; // red
-        pixels[pixelIndex + 1] = 255; // green
-        pixels[pixelIndex + 2] = 255; // blue
-        pixels[pixelIndex + 3] = 255; // alpha
-      }
-    }
-  }
+}
 
-  updatePixels();
+function drawPG0(){
+  pg0.shader(texcoordShader);
+  texcoordShader.setUniform('u_resolution', [width, height]);
+  texcoordShader.setUniform('u_time', millis() / 1000);
+  pg0.rect(0,0,width, height);
+}
 
-  // move the noise pattern to the right
-  xoff += 0.01;
+function drawPG1(){
+  pg1.shader(uniShader);
+  uniShader.setUniform('my_time', frameCount);
+  pg1.rect(0,0,width, height);
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
 }
