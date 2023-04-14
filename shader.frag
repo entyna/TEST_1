@@ -1,6 +1,4 @@
-#ifdef GL_ES
-precision mediump float;
-#endif
+precision lowp float;
 
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;

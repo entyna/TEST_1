@@ -1,11 +1,9 @@
 let texcoordShader;
-let uniShader;
 let pg0;
 let pg1;
 
 function preload(){
   texcoordShader = loadShader('shader.vert', 'shader.frag');
-  uniShader = loadShader('uniform.vert', 'uniform.frag');
 }
 
 function setup() {
@@ -13,7 +11,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   noStroke();
   pg0 = createGraphics(width, height, WEBGL);
-  pg1 = createGraphics(width, height, WEBGL);
+  pg1 = createGraphics(width, height);
   pg0.pixelDensity(1);
   pg1.noStroke();
 }
@@ -27,7 +25,6 @@ function draw() {
   image(pg1, 0, 0);
   blendMode(BLEND);
 
-
 }
 
 function drawPG0(){
@@ -38,9 +35,16 @@ function drawPG0(){
 }
 
 function drawPG1(){
-  pg1.shader(uniShader);
-  uniShader.setUniform('my_time', frameCount);
-  pg1.rect(0,0,width, height);
+  //fill('red');
+  let d = 200;
+  let gradient = pg1.drawingContext.createRadialGradient(width/2, height/2+30, 0, width/2, height/2+30, d/2)
+    gradient.addColorStop(0, 'white');
+    gradient.addColorStop(0.5, 'rgb(86,85,85)');
+    gradient.addColorStop(1, 'black');
+  pg1.drawingContext.fillStyle = gradient;
+  //blendMode(MULTIPLY);
+  pg1.circle(width/2, height/2+30, d);
+  //blendMode(BLEND);
 }
 
 function windowResized(){
