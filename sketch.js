@@ -21,7 +21,7 @@ function draw() {
   drawPG0();
   image(pg0, 0, 0);
   drawPG1();
-  blendMode(SUBTRACT);
+  blendMode(BLEND);
   image(pg1, 0, 0);
   blendMode(BLEND);
 
@@ -30,7 +30,7 @@ function draw() {
 function drawPG0(){
   pg0.shader(texcoordShader);
   texcoordShader.setUniform('u_resolution', [width, height]);
-  texcoordShader.setUniform('u_time', millis() / 1000);
+  texcoordShader.setUniform('u_time', millis() / 500);
   pg0.rect(0,0,width, height);
 }
 
@@ -42,9 +42,9 @@ function drawPG1(){
     gradient.addColorStop(0.5, 'rgb(86,85,85)');
     gradient.addColorStop(1, 'black');
   pg1.drawingContext.fillStyle = gradient;
-  //blendMode(MULTIPLY);
+  blendMode(ADD);
   pg1.circle(width/2, height/2+30, d);
-  //blendMode(BLEND);
+  blendMode(BLEND);
 }
 
 function windowResized(){
