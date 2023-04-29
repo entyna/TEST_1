@@ -55,7 +55,7 @@ function draw() {
   pgGraph();
 
   // Chaotic balls in pg
-  for (i = 0; i < 5; i++) {
+  for (i = 0; i < 10; i++) {
     x = random(width);
     y = random(height);
     size = random(5,20);
@@ -90,8 +90,10 @@ function pgRectangles() {
   pg.push();
   pg.noStroke();
   pg.blendMode(MULTIPLY);
+  pg.fill(0);
+  pg.rect(0, 0, pg.width, marg);
+  pg.rect(0, pg.height - marg, pg.width, marg);
   pg.fill(50);
-  
   if (points[0][0] == 0) {
     pg.rect(0, marg+hRect*4, pg.width, hRect);
     pg.rect(0, marg+hRect*3, pg.width/2, hRect);
@@ -155,8 +157,11 @@ points[nextPoint][1] * yScale - yShift, progress / distance);
     startTime = millis();
   }
   
-  pg.fill(0, 0, 0);
-  pg.circle(objX, objY, 20);
+  pg.fill(0);
+  pg.push();
+  pg.rectMode(CENTER);
+  pg.rect(objX, objY, pg.width/2, 10);
+  pg.pop();
 }
 
 function lines() {
