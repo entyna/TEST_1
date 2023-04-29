@@ -11,20 +11,18 @@ html, body {
 body {
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
 }
-main {
-  /* display: grid; */
-  height: 100%;
-}
-#button-container, #sketch-container{
-  /* grid-column: 1; */
-  /* grid-row: 1; */
+
+#button-container, main{
+  grid-row-start: 1;
+  grid-column-start: 1;
 }
 #button-container{
-  background-color: rgb(171, 174, 255);
-  position: absolute;
+  background-color: rgba(171, 174, 255, 0.5);
+  /* z-index: 0; */
 }
 canvas {
   width: 100% !important;
@@ -33,5 +31,6 @@ canvas {
   display: block !important;
 }
 button {
+  
   background-color: rgb(43, 226, 131);
 }

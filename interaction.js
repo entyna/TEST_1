@@ -1,20 +1,3 @@
-if (window.navigator.standalone) {
-  // website is already installed as a standalone app
-} else {
-  // website is not installed as a standalone app, show a button to install it
-}
-
-// Toggle full screen mode when the button is clicked
-const button = document.getElementById('fullscreen-button');
-button.addEventListener('click', () => {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    document.documentElement.requestFullscreen();
-  }
-});
-
-
 // Define the yaoValues array
 let yaoValues = [1, 1, 1, 1, 1, 1];
 
