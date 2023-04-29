@@ -1,17 +1,61 @@
-@media only screen and (max-width: 999px) {
-  #top form.is-search-form {
-      display: none;
-  }
+:root {
+  
 }
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  border: none;
+}
+
+/* General */
 
 html, body {
   margin: 0;
   padding: 0;
-}
-body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+body {
+  text-rendering: optimizeSpeed;
   display: grid;
   grid-template-columns: 1fr;
 }
@@ -21,8 +65,10 @@ body {
   grid-column-start: 1;
 }
 #button-container{
-  background-color: rgba(171, 174, 255, 0.5);
-  /* z-index: 0; */
+  /* background-color: rgba(171, 174, 255, 0.5); */
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
 }
 canvas {
   width: 100% !important;
@@ -31,6 +77,10 @@ canvas {
   display: block !important;
 }
 button {
-  
-  background-color: rgb(43, 226, 131);
+  cursor: pointer;
+  background: none;
+  /* background-color: rgba(43, 226, 131, 0.5); */
+  width: 100%;
+  height: 4%;
+  color: rgba(0, 0, 0, 0); /*zatím průhledné číslice, než vymyslím, co s nimi*/
 }
