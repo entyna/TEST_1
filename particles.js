@@ -78,10 +78,17 @@ class Particle {
         ellipse(this.pos.x, this.pos.y, this.size);
         
       } else if (red(c) == 20 && green(c) == 20 && blue(c) == 20) {
-        noStroke();
-        this.color.setAlpha(this.opacity);
-        fill(this.color);
-        ellipse(this.pos.x, this.pos.y, this.size);
+        if (this.size >= 1.6) {
+          noStroke();
+          this.color.setAlpha(this.opacity);
+          fill(this.color);
+          ellipse(this.pos.x, this.pos.y, this.size*15);
+        } else {
+          noStroke();
+          this.color.setAlpha(this.opacity);
+          fill(255);
+          ellipse(this.pos.x, this.pos.y, this.size);
+        }
         
       } else if (red(c) == 50 && green(c) == 50 && blue(c) == 50) {
         noStroke();
@@ -89,7 +96,7 @@ class Particle {
         fill(this.color);
         ellipse(this.pos.x, this.pos.y, this.size);
         
-      } else if (red(c) == 50 && green(c) == 100 && blue(c) == 100) {
+      } else if (red(c) == 100 && green(c) == 100 && blue(c) == 100) {
         noStroke();
         this.color.setAlpha(this.opacity);
         fill(this.color);

@@ -54,13 +54,7 @@ function draw() {
 
   pgGraph();
 
-  // Chaotic balls in pg
-  for (i = 0; i < 10; i++) {
-    x = random(width);
-    y = random(height);
-    size = random(5,20);
-    pg.circle(x, y, size);
-  }
+  chaoticBalls();
   
   //image(pg, 0, 0);
   lines();
@@ -81,6 +75,18 @@ function draw() {
     if (p.isFinished()) {
       particles.splice(i, 1);
     }
+  }
+}
+
+function chaoticBalls() {
+  for (i = 0; i < 20; i++) {
+    x = random(width);
+    y = random(height);
+    size = random(5,20);
+    push();
+    pg.fill(0);
+    pg.circle(x, y, size);
+    pop();
   }
 }
 
