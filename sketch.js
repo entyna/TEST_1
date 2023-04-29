@@ -58,7 +58,7 @@ function draw() {
 //    pg.circle(x, y, size);
 //  }
   
-  image(pg, 0, 0);
+  //image(pg, 0, 0);
   lines();
 
   // Add new particles
