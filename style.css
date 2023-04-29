@@ -54,6 +54,9 @@ html, body {
   width: 100%;
   overflow: hidden;
 }
+main {
+  height: 100%;
+}
 body {
   text-rendering: optimizeSpeed;
   display: grid;
