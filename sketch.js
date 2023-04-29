@@ -33,15 +33,16 @@ function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  //background('aqua');
   background(255);
 }
 
 function draw() {
 
   pg.background(255);
-  
+
   pgRectangles();
+
+  // Horizontal lines in pg
   pg.stroke(0);
   pg.strokeWeight(1.5)
   let spacing = height / 6;
@@ -52,12 +53,14 @@ function draw() {
   }
 
   pgGraph();
-//  for (i = 0; i < 5; i++) {
-//    x = random(width);
-//    y = random(height);
-//    size = random(5,20);
-//    pg.circle(x, y, size);
-//  }
+
+  // Chaotic balls in pg
+  for (i = 0; i < 5; i++) {
+    x = random(width);
+    y = random(height);
+    size = random(5,20);
+    pg.circle(x, y, size);
+  }
   
   //image(pg, 0, 0);
   lines();
@@ -125,18 +128,15 @@ function pgRectangles() {
 }
 
 function pgGraph() {
-  //pg.background(220);
-  //pg.clear();
-  //pg.stroke(0);
-  //pg.line(width/2, 0, width/2, height);
 
   let xScale = width*0.9;
   let yScale = height/6;
   let xShift = width*0.05;
   let yShift = height/12;
   
-  //tady byly bodíky
+  // tady byly bodíky
 
+  // Moving Object
   let nextPoint = (currentPoint + 1) % points.length;
   let distance = dist(points[currentPoint][0], points[currentPoint][1], points[nextPoint][0], points[nextPoint][1]);
 
@@ -160,12 +160,12 @@ points[nextPoint][1] * yScale - yShift, progress / distance);
 }
 
 function lines() {
-  // draw lines connecting the points
+  // linky nahoře
   let xScale = width*0.9;
   let yScale = height/6;
   let xShift = width*0.05;
   let yShift = height/12;
-  stroke(0);
+  stroke(255);
   strokeWeight(2);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
@@ -175,113 +175,5 @@ function lines() {
     line(startX, startY, endX, endY);
   }
 }
-class Particle {
-  constructor() {
-    // Check if initial position is in black area
-    let isInBlack = false;
-    while (!isInBlack) {
-      this.pos = createVector(random(width), random(height));
-      let c = pg.get(floor(this.pos.x), floor(this.pos.y));
-      let r = red(c);
-      let g = green(c);
-      let b = blue(c);
-      if (r === 0 && g === 0 && b === 0) {
-        isInBlack = true;
-      }
-    }
-    this.vel = createVector();
-    this.acc = createVector();
-    this.maxSpeed = 2;
-    this.yinSpeed = 0.7;
-    //let colors = [0, 0, 255]
-    this.color = color(0);
-    this.lifeSpan = random(50, 200);
-    this.size = random(0.5, 2);
-    this.opacity = 255;
-    this.isStopped = false;
-  }
 
-  update() {
-    let c = pg.get(floor(this.pos.x), floor(this.pos.y));
-    
-    if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
-      // Move randomly in black areas
-      this.acc = p5.Vector.fromAngle(noise(this.pos.x * 0.01, this.pos.y * 0.01) * TWO_PI)
-                        .mult(0.2);
-      this.vel.add(this.acc);
-      this.vel.limit(this.maxSpeed);
-      this.pos.add(this.vel);
-      
-    } else if (red(c) == 20 && green(c) == 20 && blue(c) == 20) {
-      // Move slowly and chaoticly in dark areas
-      this.acc = p5.Vector.fromAngle(random(this.pos.x * 0.05, this.pos.y * 0.05) * TWO_PI)
-                        .mult(0.2);
-      this.vel.add(this.acc);
-      this.vel.limit(this.yinSpeed);
-      this.pos.add(this.vel);
-      
-    } else if (red(c) == 50 && green(c) == 50 && blue(c) == 50) {
-      // Flow upwards in gray areas
-      this.acc = createVector(0, 0.1);
-      this.vel.add(this.acc);
-      this.vel.limit(this.maxSpeed);
-      this.pos.add(this.vel);
-      this.isStopped = true;
-      
-    } else if (red(c) == 100 && green(c) == 100 && blue(c) == 100) {
-      // Flow downwards in white areas
-      this.acc = createVector(0, -0.1);
-      this.vel.add(this.acc);
-      this.vel.limit(this.maxSpeed);
-      this.pos.add(this.vel);
-      this.isStopped = true;
-      
-    } else {
-      // Stop moving in white areas
-      this.isStopped = true;
-    }
-    
-    this.lifeSpan -= 1;
-    this.opacity = map(this.lifeSpan, 0, 200, 0, 255);
-  }
-
-  display() {
-    let c = pg.get(floor(this.pos.x), floor(this.pos.y));
-    
-    if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
-      noStroke();
-      this.color.setAlpha(this.opacity);
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, this.size);
-      
-    } else if (red(c) == 20 && green(c) == 20 && blue(c) == 20) {
-      noStroke();
-      this.color.setAlpha(this.opacity);
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, this.size);
-      
-    } else if (red(c) == 50 && green(c) == 50 && blue(c) == 50) {
-      noStroke();
-      this.color.setAlpha(this.opacity);
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, this.size);
-      
-    } else if (red(c) == 50 && green(c) == 100 && blue(c) == 100) {
-      noStroke();
-      this.color.setAlpha(this.opacity);
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, this.size);
-      
-    } else {
-      noStroke();
-      this.color.setAlpha(this.opacity);
-      fill(this.color);
-      ellipse(this.pos.x, this.pos.y, this.size);
-    }
-  }
-
-  isFinished() {
-  return this.lifeSpan <= 0 || this.pos.x < 0 || this.pos.x > width ||     this.pos.y < 0 || this.pos.y > height;
-  }
-}
 
