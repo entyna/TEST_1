@@ -4,8 +4,28 @@ html, body {
 }
 body {
   height: 100%;
+  width: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
+}
+main {
+  /* display: grid; */
+  height: 100%;
+}
+#button-container, #sketch-container{
+  /* grid-column: 1; */
+  /* grid-row: 1; */
+}
+#button-container{
+  background-color: rgb(171, 174, 255);
+  position: absolute;
 }
 canvas {
-  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+button {
+  background-color: blueviolet;
 }

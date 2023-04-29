@@ -30,7 +30,8 @@ function clearCanvas() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); 
+  var canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('sketch-container');
   pg = createGraphics(width, height);
   //background('aqua');
   background(255);

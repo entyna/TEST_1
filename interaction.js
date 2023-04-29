@@ -1,6 +1,11 @@
 // Define the yaoValues array
 let yaoValues = [1, 1, 1, 1, 1, 1];
 
+// Create the buttons container
+let buttonContainer = document.createElement("div");
+buttonContainer.id = "button-container";
+document.body.appendChild(buttonContainer);
+
 // Create the buttons
 let buttons = [];
 for (let i = 0; i < 6; i++) {
@@ -14,5 +19,5 @@ for (let i = 0; i < 6; i++) {
     updatePoints(yaoValues);
   });
   buttons.push(button);
-  document.body.appendChild(button);
+  buttonContainer.appendChild(button);
 }
