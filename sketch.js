@@ -5,12 +5,12 @@ let dur = 2000; // in milliseconds
 let pg;
 
 let points = [
-   [1, 0],
-   [1, 1],
-   [1, 2],
-   [1, 3],
-   [1, 4],
-   [1, 5]
+   [0, 0],
+   [0, 1],
+   [0, 2],
+   [0, 3],
+   [0, 4],
+   [0, 5]
 ];
 
 function updatePoints(yaoValues) {
@@ -26,14 +26,14 @@ function updatePoints(yaoValues) {
 
 function clearCanvas() {
   clear();
-  background(255);
+  background(0);
 }
 
 function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  background(255);
+  background(0);
 }
 
 function draw() {
@@ -54,7 +54,7 @@ function draw() {
 
   pgGraph();
 
-  chaoticBalls();
+  //chaoticBalls();
   
   //image(pg, 0, 0);
   lines();
@@ -177,7 +177,7 @@ function lines() {
   let xShift = width*0.05;
   let yShift = height/12;
   stroke(255);
-  strokeWeight(2);
+  strokeWeight(0.7);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
     let startY = height - points[i][1] * yScale - yShift;
