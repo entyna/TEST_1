@@ -17,7 +17,7 @@ class Particle {
       this.maxSpeed = 2;
       this.yinSpeed = 0.7;
       let colors = [0, 255]
-      this.color = color(random(colors));
+      this.color = color(255, 0, 0);
       this.lifeSpan = random(50, 200);
       this.size = random(0.5, 2);
       this.opacity = 255;
