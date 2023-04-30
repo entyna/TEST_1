@@ -61,7 +61,7 @@ function draw() {
   //chaoticBalls();
   
   //image(pg, 0, 0);
-  lines();
+  graphLine();
 
   // Add new particles
   if (particles.length < 100) {
@@ -178,14 +178,16 @@ points[nextPoint][1] * yScale - yShift, progress / distance);
   pg.pop();
 }
 
-function lines() {
-  // linky nahoře
+function graphLine() {
+  // linka nahoře
   let xScale = width*0.9;
   let yScale = height/6;
   let xShift = width*0.05;
   let yShift = height/12;
+  push();
   stroke(255);
-  strokeWeight(0.7);
+  fill(0)
+  strokeWeight(0.5);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
     let startY = height - points[i][1] * yScale - yShift;
@@ -193,6 +195,12 @@ function lines() {
     let endY = height - points[i+1][1] * yScale - yShift;
     line(startX, startY, endX, endY);
   }
+  for (let i = 0; i < points.length; i++) {
+    let x = points[i][0] * xScale + xShift;
+    let y = height - points[i][1] * yScale - yShift;
+    circle(x, y, 5);
+  }
+  pop();
 }
 
 
