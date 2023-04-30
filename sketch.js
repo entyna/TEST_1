@@ -44,7 +44,7 @@ function draw() {
 
   // Horizontal lines in pg
   pg.stroke(0);
-  pg.strokeWeight(1.5)
+  pg.strokeWeight(2);
   let spacing = height / 6;
   let marg = height / 12;
   for (let i = 0; i < 6; i++) {
