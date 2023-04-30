@@ -1,6 +1,9 @@
 :root {
   
 }
+#pg {
+  display: none;
+}
 /* Removing blue highlight of buttons on mobile */
 input,
 textarea,
@@ -64,17 +67,17 @@ button {
 html, body {
   margin: 0;
   padding: 0;
-  height: 100svh;
+  height: -webkit-fill-available;
   /* width: 100%; */
   overflow: hidden;
-}
-main {
-  height: 100%;
 }
 body {
   text-rendering: optimizeSpeed;
   display: grid;
   grid-template-columns: 1fr;
+}
+main {
+  height: 100%;
 }
 
 #button-container, main{
@@ -86,6 +89,9 @@ body {
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-around;
+}
+#sketch-container{
+  height: 100vh;
 }
 canvas {
   width: 100% !important;

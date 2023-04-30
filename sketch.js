@@ -13,6 +13,8 @@ let points = [
    [1, 5]
 ];
 
+
+
 function updatePoints(yaoValues) {
   points[0][0] = yaoValues[0];
   points[1][0] = yaoValues[1];
@@ -30,7 +32,9 @@ function clearCanvas() {
 }
 
 function setup() {
-  var canvas = createCanvas(windowWidth, windowHeight);
+  var canvasDiv = document.getElementById('sketch-container');
+  var divHeight = canvasDiv.offsetHeight;
+  var canvas = createCanvas(windowWidth, divHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
   background(0);
@@ -77,6 +81,10 @@ function draw() {
     }
   }
 }
+
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
 
 function chaoticBalls() {
   for (i = 0; i < 20; i++) {
