@@ -61,12 +61,10 @@ button {
 
 /* General */
 
-
-
 html, body {
   margin: 0;
   padding: 0;
-  height: -webkit-fill-available;
+  height: 100svh;
   /* width: 100%; */
   overflow: hidden;
 }
