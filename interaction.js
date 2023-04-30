@@ -1,7 +1,3 @@
-document.ontouchmove = function(event) {
-  event.preventDefault();
-};
-
 // Define the yaoValues array
 let yaoValues = [1, 1, 1, 1, 1, 1];
 

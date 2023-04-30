@@ -1,9 +1,7 @@
 :root {
   
 }
-#pg {
-  display: none;
-}
+
 /* Removing blue highlight of buttons on mobile */
 input,
 textarea,
@@ -91,11 +89,11 @@ main {
   justify-content: space-around;
 }
 #sketch-container{
-  height: 100vh;
+  height: 100%;
 }
 canvas {
   width: 100% !important;
-  height: auto !important;
+  height: 100dvh !important;
   max-width: 100% !important;
   display: block !important;
 }
