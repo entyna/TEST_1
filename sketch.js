@@ -41,7 +41,7 @@ function setup() {
 }
 
 function draw() {
-
+  background(0, 0.9);
   pg.background(255);
 
   pgRectangles();
@@ -82,9 +82,9 @@ function draw() {
   }
 }
 
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
-// }
+function windowResized() {
+   resizeCanvas(windowWidth, windowHeight);
+ }
 
 function chaoticBalls() {
   for (i = 0; i < 20; i++) {
