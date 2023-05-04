@@ -28,7 +28,7 @@ function updatePoints(yaoValues) {
 
 function clearCanvas() {
   clear();
-  background(255);
+  background(0);
 }
 
 function setup() {
@@ -37,7 +37,7 @@ function setup() {
   var canvas = createCanvas(windowWidth, divHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  background(255);
+  background(0);
 }
 
 function draw() {
@@ -185,8 +185,8 @@ function graphLine() {
   let xShift = width*0.05;
   let yShift = height/12;
   push();
-  stroke(0);
-  fill(255)
+  stroke(255);
+  fill(0)
   strokeWeight(0.5);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
