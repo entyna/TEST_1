@@ -16,7 +16,7 @@ class Particle {
       this.acc = createVector();
       this.maxSpeed = 2;
       this.yinSpeed = 0.7;
-      let colors = [0, 255]
+      let colors = [0]
       this.color = color(random(colors));
       this.lifeSpan = random(50, 200);
       this.size = random(0.5, 2);

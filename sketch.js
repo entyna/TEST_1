@@ -28,7 +28,7 @@ function updatePoints(yaoValues) {
 
 function clearCanvas() {
   clear();
-  background(0);
+  background(255);
 }
 
 function setup() {
@@ -37,11 +37,11 @@ function setup() {
   var canvas = createCanvas(windowWidth, divHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  background(0);
+  background(255);
 }
 
 function draw() {
-  background(0, 0.9);
+  //background(255);
   pg.background(255);
 
   pgRectangles();
@@ -185,8 +185,8 @@ function graphLine() {
   let xShift = width*0.05;
   let yShift = height/12;
   push();
-  stroke(255);
-  fill(0)
+  stroke(0);
+  fill(255)
   strokeWeight(0.5);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
@@ -198,7 +198,7 @@ function graphLine() {
   for (let i = 0; i < points.length; i++) {
     let x = points[i][0] * xScale + xShift;
     let y = height - points[i][1] * yScale - yShift;
-    circle(x, y, 5);
+    circle(x, y, 10);
   }
   pop();
 }
