@@ -185,9 +185,11 @@ function graphLine() {
   let xShift = width*0.05;
   let yShift = height/12;
   push();
+  translate(width, 0);
+  scale(-1, 1);
   stroke(255);
   fill(0)
-  strokeWeight(0.5);
+  strokeWeight(1);
   for (let i = 0; i < points.length - 1; i++) {
     let startX = points[i][0] * xScale + xShift;
     let startY = height - points[i][1] * yScale - yShift;
