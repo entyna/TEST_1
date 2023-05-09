@@ -85,6 +85,7 @@ main {
 #button-container{
   /* background-color: rgba(171, 174, 255, 0.5); */
   display: flex;
+  z-index: 3;
   flex-direction: column-reverse;
   justify-content: space-around;
 }

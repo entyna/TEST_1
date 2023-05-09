@@ -40,11 +40,11 @@ function setup() {
   var canvas = createCanvas(windowWidth, divHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  background(0);
+  //background(0);
 }
 
 function draw() {
-  //background(255);
+  background(0);
   pg.background(255);
 
   pgRectangles();

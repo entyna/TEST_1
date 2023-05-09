@@ -4,6 +4,7 @@ class Particle {
       let isInBlack = false;
       while (!isInBlack) {
         this.pos = createVector(random(width), random(height));
+        this.prevPos = createVector(this.pos.x, this.pos.y);
         let c = pg.get(floor(this.pos.x), floor(this.pos.y));
         let r = red(c);
         let g = green(c);
@@ -26,6 +27,7 @@ class Particle {
   
     update() {
       let c = pg.get(floor(this.pos.x), floor(this.pos.y));
+      this.prevPos.set(this.pos.x, this.pos.y);
       
       if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
         // Move randomly in black areas
@@ -97,6 +99,9 @@ class Particle {
         ellipse(this.pos.x, this.pos.y, this.size);
         
       } else if (red(c) == 100 && green(c) == 100 && blue(c) == 100) {
+        stroke(this.color);
+        strokeWeight(this.size);
+        line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
         noStroke();
         this.color.setAlpha(this.opacity);
         fill(this.color);
