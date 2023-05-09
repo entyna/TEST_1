@@ -28,6 +28,9 @@ function updatePoints(yaoValues) {
 
 function clearCanvas() {
   clear();
+  //pg.fill(255, 0, 0);
+  //pg.circle(random(0, width), random(0, height), random(width/10, width/4));
+  //image(pg, 0, 0);
   background(0);
 }
 
@@ -60,7 +63,7 @@ function draw() {
 
   //chaoticBalls();
   
-  //image(pg, 0, 0);
+  image(pg, 0, 0);
   graphLine();
 
   // Add new particles
@@ -99,45 +102,51 @@ function chaoticBalls() {
 }
 
 function pgRectangles() {
-  let hRect = pg.height/6;
-  let marg = pg.height/12
+  let hRect = pg.height*0.2;
   pg.push();
   pg.noStroke();
   pg.blendMode(MULTIPLY);
-  pg.fill(0);
-  pg.rect(0, 0, pg.width, marg);
-  pg.rect(0, pg.height - marg, pg.width, marg);
+  
   pg.fill(50);
+  
   if (points[0][0] == 0) {
-    pg.rect(0, marg+hRect*4, pg.width, hRect);
-    pg.rect(0, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(0, marg+hRect*2, pg.width/3, hRect);
+    pg.rect(0, pg.height*0.8, pg.width, hRect);
+    pg.rect(0, pg.height*0.6, pg.width/3, hRect);
+    pg.rect(pg.width/1.5, pg.height*0.6, pg.width/3, hRect);
+    pg.rect(0, pg.height*0.4, pg.width/5, hRect);
+    pg.rect(pg.width*0.8, pg.height*0.4, pg.width/5, hRect);
   }
   if (points[1][0] == 0) {
-    pg.rect(0, marg+hRect, pg.width/2, hRect);
-    pg.rect(pg.width/1.5, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(pg.width/2, marg+hRect*3, pg.width/2, hRect);
+    pg.rect(0, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(pg.width/1.5, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(pg.width*0.4, pg.height*0.4, pg.width/5, hRect);
+    pg.rect(pg.width/3, pg.height*0.6, pg.width/3, hRect);
   }
   if (points[2][0] == 0) {
-    pg.rect(0, marg, pg.width, hRect);
-    pg.rect(pg.width/2, marg+hRect, pg.width/2, hRect);
-    pg.rect(pg.width/3, marg+hRect*2, pg.width/3, hRect);
+    pg.rect(0, 0, pg.width, hRect);
+    pg.rect(pg.width/3, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(pg.width*0.2, pg.height*0.4, pg.width/5, hRect);
+    pg.rect(pg.width*0.6, pg.height*0.4, pg.width/5, hRect);
   }
   pg.fill(100);
   if (points[3][0] == 0) {
-    pg.rect(0, marg+hRect*4, pg.width, hRect);
-    pg.rect(pg.width/2, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(pg.width/3, marg+hRect*2, pg.width/3, hRect);
+    pg.rect(0, pg.height*0.8, pg.width, hRect);
+    pg.rect(pg.width/3, pg.height*0.6, pg.width/3, hRect);
+    pg.rect(pg.width*0.2, pg.height*0.4, pg.width/5, hRect);
+    pg.rect(pg.width*0.6, pg.height*0.4, pg.width/5, hRect);
   }
   if (points[4][0] == 0) {
-    pg.rect(0, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(pg.width/1.5, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(pg.width/2, marg+hRect, pg.width/2, hRect);
+    pg.rect(pg.width/3, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(pg.width/1.5, pg.height*0.6, pg.width/3, hRect);
+    pg.rect(0, pg.height*0.6, pg.width/3, hRect);
+    pg.rect(pg.width*0.4, pg.height*0.4, pg.width/5, hRect);
   }
   if (points[5][0] == 0) {
-    pg.rect(0, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(0, marg+hRect, pg.width/2, hRect);
-    pg.rect(0, marg, pg.width, hRect);
+    pg.rect(0, 0, pg.width, hRect);
+    pg.rect(0, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(pg.width/1.5, pg.height*0.2, pg.width/3, hRect);
+    pg.rect(0, pg.height*0.4, pg.width/5, hRect);
+    pg.rect(pg.width*0.8, pg.height*0.4, pg.width/5, hRect);
   }
   pg.pop();
   
