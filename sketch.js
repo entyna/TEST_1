@@ -28,9 +28,6 @@ function updatePoints(yaoValues) {
 
 function clearCanvas() {
   clear();
-  //pg.fill(255, 0, 0);
-  //pg.circle(random(0, width), random(0, height), random(width/10, width/4));
-  //image(pg, 0, 0);
   background(0);
 }
 
@@ -40,11 +37,11 @@ function setup() {
   var canvas = createCanvas(windowWidth, divHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  //background(0);
+  background(0);
 }
 
 function draw() {
-  background(0);
+  //background(0);
   pg.background(255);
 
   pgRectangles();
@@ -63,7 +60,7 @@ function draw() {
 
   //chaoticBalls();
   
-  image(pg, 0, 0);
+  //image(pg, 0, 0);
   graphLine();
 
   // Add new particles
