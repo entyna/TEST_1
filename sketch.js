@@ -4,6 +4,8 @@ let startTime = 0;
 let dur = 2000; // in milliseconds
 let pg;
 let HH, HM, MH, MM, ME, EM, EE, EH, HE;
+let dots = []; // Array to store the dots
+let dotTimer = 0
 
 let points = [
    [1, 0],
@@ -57,13 +59,18 @@ function draw() {
   pgFields();
   //image(pg, 0, 0);
   
-  dotpos = createVector(random(width), random(height));
-  let c = pg.get(floor(dotpos.x), floor(dotpos.y));
-      
-  if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
-    fill('black');
-    noStroke();
-    circle(dotpos.x, dotpos.y, 2);
+  dotTimer++; // Increment the timer
+
+  if (dotTimer >= 80) { // Check if 20 seconds have passed
+    generateDots(); // Generate the dots
+    dotTimer = 0; // Reset the timer
+  }
+
+  // Display and update the dots
+  for (let i = 0; i < dots.length; i++) {
+    let dot = dots[i];
+    dot.display();
+    dot.update();
   }
 
 
@@ -101,6 +108,37 @@ function draw() {
   //     particles.splice(i, 1);
   //   }
   // }
+}
+function generateDots() {
+  dots = []; // Clear the existing dots
+  
+  // Generate 100 dots within x < width/4
+  let dotCount = 0;
+  while (dotCount < 600) {
+    let dotpos = createVector(random(width / 4), random(height));
+    let c = pg.get(floor(dotpos.x), floor(dotpos.y)); // Use get() instead of pg.get()
+
+    if (red(c) === 0 && green(c) === 0 && blue(c) === 0) {
+      dots.push(new Dot(dotpos.x, dotpos.y)); // Add dot to the array
+      dotCount++;
+    }
+  }
+}
+
+class Dot {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+  }
+
+  display() {
+    fill('black');
+    noStroke();
+    circle(this.pos.x, this.pos.y, 2);
+  }
+
+  update() {
+    // Add any desired animation or movement here
+  }
 }
 function pgFields() {
   pg.stroke(0);
