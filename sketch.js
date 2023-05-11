@@ -3,6 +3,7 @@ let particles = [];
 let startTime = 0;
 let dur = 2000; // in milliseconds
 let pg;
+let HH, HM, MH, MM, ME, EM, EE, EH, HE;
 
 let points = [
    [1, 0],
@@ -33,101 +34,96 @@ function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('sketch-container');
   pg = createGraphics(width, height);
-  background(255);
+  //background(255);
+
+  // Trigram Fields
+  let hMarg = height / 12;
+  let hField = height / 6;
+  HH = new Field(pg, width * 0.7, width * 0.2, hMarg, hField, 5);
+  MH = new Field(pg, width * 0.2, width * 0.2, hMarg + hField, hField, 5);
+  HM = new Field(pg, width * 0.6, width * 0.2, hMarg + hField, hField, 5);
+  EH = new Field(pg, width * 0.1, width * 0.2, hMarg + 2 * hField, hField, 5);
+  HE = new Field(pg, width * 0.2, width * 0.2, hMarg + 2 * hField, hField, 5);
+  MM = new Field(pg, width * 0.57, width * 0.2, hMarg + 2 * hField, hField, 5);
+  EM = new Field(pg, width * 0.2, width * 0.2, hMarg + 3 * hField, hField, 5);
+  ME = new Field(pg, width * 0.6, width * 0.2, hMarg + 3 * hField, hField, 5);
+  EE = new Field(pg, width * 0.7, width * 0.2, hMarg + 4 * hField, hField, 5);
 }
 
 function draw() {
 
+  // pg Offscreen Buffer:
   pg.background(255);
+  pgFields();
+  //image(pg, 0, 0);
+  
+  dotpos = createVector(random(width), random(height));
+  let c = pg.get(floor(dotpos.x), floor(dotpos.y));
+      
+  if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
+    fill('black');
+    noStroke();
+    circle(dotpos.x, dotpos.y, 2);
+  }
 
-  pgRectangles();
 
-  // Horizontal lines in pg
+     // Horizontal lines in pg
+  // pg.stroke(0);
+  // pg.strokeWeight(1.5)
+  // let spacing = height / 6;
+  // let marg = height / 12;
+  // for (let i = 0; i < 6; i++) {
+  //   pg.line(0, marg, width, marg);
+  //   marg += spacing;
+  // }
+     //pgGraph();
+
+  //toggleLine();
+  //push();
+  //blendMode(DARKEST);
+  
+  //pop();
+
+  // // Add new particles
+  // if (particles.length < 100) {
+  //   for (let i = 0; i < 10; i++) {
+  //     let p = new Particle();
+  //     particles.push(p);
+  //   }
+  // }
+  
+  // // Update and display particles
+  // for (let i = particles.length - 1; i >= 0; i--) {
+  //   let p = particles[i];
+  //   p.update();
+  //   p.display();
+  //   if (p.isFinished()) {
+  //     particles.splice(i, 1);
+  //   }
+  // }
+}
+function pgFields() {
   pg.stroke(0);
-  pg.strokeWeight(1.5)
-  let spacing = height / 6;
-  let marg = height / 12;
-  for (let i = 0; i < 6; i++) {
-    pg.line(0, marg, width, marg);
-    marg += spacing;
-  }
-
-  pgGraph();
-  pg.rect(200, 200, 80);
-
-  // Chaotic balls in pg
-  for (i = 0; i < 5; i++) {
-    x = random(width);
-    y = random(height);
-    size = random(5,20);
-    pg.circle(x, y, size);
-  }
-  
-  image(pg, 0, 0);
-  lines();
-
-  // Add new particles
-  if (particles.length < 100) {
-    for (let i = 0; i < 10; i++) {
-      let p = new Particle();
-      particles.push(p);
-    }
-  }
-  
-  // Update and display particles
-  for (let i = particles.length - 1; i >= 0; i--) {
-    let p = particles[i];
-    p.update();
-    p.display();
-    if (p.isFinished()) {
-      particles.splice(i, 1);
-    }
-  }
+  pg.strokeWeight(2);
+  pg.fill(points[2][0]*255, 0, points[5][0]*255);
+  HH.show();
+  pg.fill(points[1][0]*255, 0, points[5][0]*255);
+  MH.show();
+  pg.fill(points[2][0]*255, 0, points[4][0]*255);
+  HM.show();
+  pg.fill(points[0][0]*255, 0, points[5][0]*255);
+  EH.show();
+  pg.fill(points[2][0]*255, 0, points[3][0]*255);
+  HE.show();
+  pg.fill(points[1][0]*255, 0, points[4][0]*255);
+  MM.show();
+  pg.fill(points[0][0]*255, 0, points[4][0]*255);
+  EM.show();
+  pg.fill(points[1][0]*255, 0, points[3][0]*255);
+  ME.show();
+  pg.fill(points[0][0]*255, 0, points[3][0]*255);
+  EE.show();
 }
-
-function pgRectangles() {
-  let hRect = pg.height/6;
-  let marg = pg.height/12
-  pg.push();
-  pg.noStroke();
-  pg.blendMode(MULTIPLY);
-  pg.fill(50);
-  
-  if (points[0][0] == 0) {
-    pg.rect(0, marg+hRect*4, pg.width, hRect);
-    pg.rect(0, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(0, marg+hRect*2, pg.width/3, hRect);
-  }
-  if (points[1][0] == 0) {
-    pg.rect(0, marg+hRect, pg.width/2, hRect);
-    pg.rect(pg.width/1.5, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(pg.width/2, marg+hRect*3, pg.width/2, hRect);
-  }
-  if (points[2][0] == 0) {
-    pg.rect(0, marg, pg.width, hRect);
-    pg.rect(pg.width/2, marg+hRect, pg.width/2, hRect);
-    pg.rect(pg.width/3, marg+hRect*2, pg.width/3, hRect);
-  }
-  pg.fill(100);
-  if (points[3][0] == 0) {
-    pg.rect(0, marg+hRect*4, pg.width, hRect);
-    pg.rect(pg.width/2, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(pg.width/3, marg+hRect*2, pg.width/3, hRect);
-  }
-  if (points[4][0] == 0) {
-    pg.rect(0, marg+hRect*3, pg.width/2, hRect);
-    pg.rect(pg.width/1.5, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(pg.width/2, marg+hRect, pg.width/2, hRect);
-  }
-  if (points[5][0] == 0) {
-    pg.rect(0, marg+hRect*2, pg.width/3, hRect);
-    pg.rect(0, marg+hRect, pg.width/2, hRect);
-    pg.rect(0, marg, pg.width, hRect);
-  }
-  pg.pop();
-  
-}
-
 function pgGraph() {
 
   let xScale = width*0.9;
@@ -160,7 +156,7 @@ points[nextPoint][1] * yScale - yShift, progress / distance);
   pg.circle(objX, objY, 20);
 }
 
-function lines() {
+function toggleLine() {
   // linky nahoře
   let xScale = width*0.9;
   let yScale = height/6;

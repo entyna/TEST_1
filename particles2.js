@@ -14,12 +14,12 @@ class Particle {
       }
       this.vel = createVector();
       this.acc = createVector();
-      this.maxSpeed = 2;
+      this.maxSpeed = 10;
       this.yinSpeed = 0.7;
       //let colors = [0, 0, 255]
       this.color = color(0);
       this.lifeSpan = random(50, 200);
-      this.size = random(0.5, 2);
+      this.size = random(5, 12);
       this.opacity = 255;
       this.isStopped = false;
     }
@@ -34,6 +34,7 @@ class Particle {
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
+        
         
       } else if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
         // Move slowly and chaoticly in dark areas
@@ -71,10 +72,10 @@ class Particle {
     display() {
       let c = pg.get(floor(this.pos.x), floor(this.pos.y));
       
-      if (red(c) == 0 && green(c) == 0 && blue(c) == 0) {
+      if (red(c) == 255 && green(c) == 0 && blue(c) == 255) {
         noStroke();
-        this.color.setAlpha(this.opacity);
-        fill(this.color);
+        //this.color.setAlpha(this.opacity);
+        fill('white');
         ellipse(this.pos.x, this.pos.y, this.size);
         
       } else if (red(c) == 20 && green(c) == 20 && blue(c) == 20) {
