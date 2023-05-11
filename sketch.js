@@ -4,8 +4,8 @@ let startTime = 0;
 let dur = 2000; // in milliseconds
 let pg;
 let HH, HM, MH, MM, ME, EM, EE, EH, HE;
-let dots = []; // Array to store the dots
-let dotTimer = 0
+let dots = [];
+let dotTimer = 0;
 
 let points = [
    [1, 0],
@@ -55,34 +55,40 @@ function setup() {
 function draw() {
 
   // pg Offscreen Buffer:
+  background(255);
   pg.background(255);
   pgFields();
+  // Horizontal lines in pg
+  push();
+  pg.stroke(255);
+  pg.strokeWeight(4)
+  let spacing = height / 6;
+  let marg = height / 12;
+  for (let i = 0; i < 6; i++) {
+    pg.line(0, marg, width, marg);
+    marg += spacing;
+  }
+  pop();
   //image(pg, 0, 0);
   
-  dotTimer++; // Increment the timer
+  dotTimer++;
 
-  if (dotTimer >= 80) { // Check if 20 seconds have passed
-    generateDots(); // Generate the dots
-    dotTimer = 0; // Reset the timer
+  if (dotTimer >= 120) {
+    generateDots();
+    dotTimer = 0;
   }
 
-  // Display and update the dots
-  for (let i = 0; i < dots.length; i++) {
+  for (let i = dots.length - 1; i >= 0; i--) {
     let dot = dots[i];
     dot.display();
-    dot.update();
+    
+    if (dot.lifespan <= 0) {
+      dots.splice(i, 1);
+    }
   }
 
 
-     // Horizontal lines in pg
-  // pg.stroke(0);
-  // pg.strokeWeight(1.5)
-  // let spacing = height / 6;
-  // let marg = height / 12;
-  // for (let i = 0; i < 6; i++) {
-  //   pg.line(0, marg, width, marg);
-  //   marg += spacing;
-  // }
+
      //pgGraph();
 
   //toggleLine();
@@ -110,34 +116,42 @@ function draw() {
   // }
 }
 function generateDots() {
-  dots = []; // Clear the existing dots
-  
-  // Generate 100 dots within x < width/4
   let dotCount = 0;
-  while (dotCount < 600) {
+  let maxDots = 600;
+
+  let generateDot = function() {
     let dotpos = createVector(random(width / 4), random(height));
-    let c = pg.get(floor(dotpos.x), floor(dotpos.y)); // Use get() instead of pg.get()
+    let c = pg.get(floor(dotpos.x), floor(dotpos.y));
 
     if (red(c) === 0 && green(c) === 0 && blue(c) === 0) {
-      dots.push(new Dot(dotpos.x, dotpos.y)); // Add dot to the array
+      dots.push(new Dot(dotpos.x, dotpos.y));
       dotCount++;
     }
+
+    if (dotCount < maxDots) {
+      setTimeout(generateDot, 0); // Delay between generating each dot (set to 0 for instant generation)
+    }
+  };
+
+  for (let i = 0; i < maxDots; i++) {
+    setTimeout(generateDot, i * 10); // Delay between each batch of dots (adjust as needed)
   }
 }
 
 class Dot {
   constructor(x, y) {
     this.pos = createVector(x, y);
+    this.lifespan = 255; // Initial lifespan value (adjust as needed)
   }
 
   display() {
     fill('black');
     noStroke();
     circle(this.pos.x, this.pos.y, 2);
-  }
-
-  update() {
-    // Add any desired animation or movement here
+    this.lifespan--; // Decrement the lifespan
+    
+    // You can add additional logic here if you want to change the appearance
+    // or behavior of the particle as its lifespan decreases.
   }
 }
 function pgFields() {
