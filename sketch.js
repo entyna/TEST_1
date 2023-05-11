@@ -60,7 +60,7 @@ function draw() {
   pgFields();
   // Horizontal lines in pg
   push();
-  pg.stroke(255);
+  pg.stroke(255,255,0);
   pg.strokeWeight(4)
   let spacing = height / 6;
   let marg = height / 12;
@@ -73,7 +73,7 @@ function draw() {
   
   dotTimer++;
 
-  if (dotTimer >= 120) {
+  if (dotTimer >= 60) {
     generateDots();
     dotTimer = 0;
   }
@@ -92,62 +92,50 @@ function draw() {
      //pgGraph();
 
   //toggleLine();
-  //push();
-  //blendMode(DARKEST);
-  
-  //pop();
 
-  // // Add new particles
-  // if (particles.length < 100) {
-  //   for (let i = 0; i < 10; i++) {
-  //     let p = new Particle();
-  //     particles.push(p);
-  //   }
-  // }
+  // Add new particles
+  if (particles.length < 5) {
+    for (let i = 0; i < 10; i++) {
+      let p = new Particle();
+      particles.push(p);
+    }
+  }
   
-  // // Update and display particles
-  // for (let i = particles.length - 1; i >= 0; i--) {
-  //   let p = particles[i];
-  //   p.update();
-  //   p.display();
-  //   if (p.isFinished()) {
-  //     particles.splice(i, 1);
-  //   }
-  // }
+  // Update and display particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    p.update();
+    p.display();
+    if (p.isFinished()) {
+      particles.splice(i, 1);
+    }
+  }
 }
 function generateDots() {
+  //dots = []; // Clear the existing dots
+ 
   let dotCount = 0;
-  let maxDots = 600;
-
-  let generateDot = function() {
-    let dotpos = createVector(random(width / 4), random(height));
+  while (dotCount < 400) {
+    let dotpos = createVector(random(width), random(height));
     let c = pg.get(floor(dotpos.x), floor(dotpos.y));
 
     if (red(c) === 0 && green(c) === 0 && blue(c) === 0) {
       dots.push(new Dot(dotpos.x, dotpos.y));
       dotCount++;
     }
-
-    if (dotCount < maxDots) {
-      setTimeout(generateDot, 0); // Delay between generating each dot (set to 0 for instant generation)
-    }
-  };
-
-  for (let i = 0; i < maxDots; i++) {
-    setTimeout(generateDot, i * 10); // Delay between each batch of dots (adjust as needed)
   }
 }
 
 class Dot {
   constructor(x, y) {
     this.pos = createVector(x, y);
-    this.lifespan = 255; // Initial lifespan value (adjust as needed)
+    this.lifespan = random(70, 100); // Initial lifespan value (adjust as needed)
   }
 
   display() {
     fill('black');
     noStroke();
-    circle(this.pos.x, this.pos.y, 2);
+    circle(this.pos.x, this.pos.y, 1.5);
     this.lifespan--; // Decrement the lifespan
     
     // You can add additional logic here if you want to change the appearance
@@ -157,23 +145,23 @@ class Dot {
 function pgFields() {
   pg.stroke(0);
   pg.strokeWeight(2);
-  pg.fill(points[2][0]*255, 0, points[5][0]*255);
+  pg.fill(points[2][0]*255, 100, points[5][0]*255);
   HH.show();
-  pg.fill(points[1][0]*255, 0, points[5][0]*255);
+  pg.fill(points[1][0]*255, 100, points[5][0]*255);
   MH.show();
-  pg.fill(points[2][0]*255, 0, points[4][0]*255);
+  pg.fill(points[2][0]*255, 100, points[4][0]*255);
   HM.show();
-  pg.fill(points[0][0]*255, 0, points[5][0]*255);
+  pg.fill(points[0][0]*255, 100, points[5][0]*255);
   EH.show();
-  pg.fill(points[2][0]*255, 0, points[3][0]*255);
+  pg.fill(points[2][0]*255, 100, points[3][0]*255);
   HE.show();
-  pg.fill(points[1][0]*255, 0, points[4][0]*255);
+  pg.fill(points[1][0]*255, 100, points[4][0]*255);
   MM.show();
-  pg.fill(points[0][0]*255, 0, points[4][0]*255);
+  pg.fill(points[0][0]*255, 100, points[4][0]*255);
   EM.show();
-  pg.fill(points[1][0]*255, 0, points[3][0]*255);
+  pg.fill(points[1][0]*255, 100, points[3][0]*255);
   ME.show();
-  pg.fill(points[0][0]*255, 0, points[3][0]*255);
+  pg.fill(points[0][0]*255, 100, points[3][0]*255);
   EE.show();
 }
 function pgGraph() {

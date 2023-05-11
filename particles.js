@@ -8,7 +8,7 @@ class Particle {
         let r = red(c);
         let g = green(c);
         let b = blue(c);
-        if (r === 0 && g === 0 && b === 0) {
+        if (r === 255 && g === 255 && b === 0) {
           isInBlack = true;
         }
       }
